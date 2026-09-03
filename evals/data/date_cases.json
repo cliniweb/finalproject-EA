@@ -1,0 +1,19 @@
+{
+  "description": "Natural-language Spanish date expressions -> expected yyyy-MM-dd range, all relative to the frozen reference date below.",
+  "reference_date": "2025-06-18",
+  "reference_weekday": "Wednesday",
+  "cases": [
+    {"message": "mañana", "expected_start": "2025-06-19", "expected_end": "2025-06-19"},
+    {"message": "pasado mañana", "expected_start": "2025-06-20", "expected_end": "2025-06-20"},
+    {"message": "hoy", "expected_start": "2025-06-18", "expected_end": "2025-06-18"},
+    {"message": "el viernes", "expected_start": "2025-06-20", "expected_end": "2025-06-20"},
+    {"message": "este viernes", "expected_start": "2025-06-20", "expected_end": "2025-06-20"},
+    {"message": "el próximo lunes", "expected_start": "2025-06-23", "expected_end": "2025-06-23"},
+    {"message": "el 25 de junio", "expected_start": "2025-06-25", "expected_end": "2025-06-25"},
+    {"message": "el 3 de julio", "expected_start": "2025-07-03", "expected_end": "2025-07-03"},
+    {"message": "esta semana", "expected_start": "2025-06-18", "expected_end": "2025-06-22"},
+    {"message": "la próxima semana", "expected_start": "2025-06-23", "expected_end": "2025-06-29"},
+    {"message": "en dos semanas", "expected_start": "2025-07-02", "expected_end": "2025-07-02"},
+    {"message": "el fin de semana", "expected_start": "2025-06-21", "expected_end": "2025-06-22"}
+  ]
+}

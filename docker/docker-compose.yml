@@ -1,0 +1,56 @@
+# Docker Compose for CliniAI v2 (dockerified deployment).
+#
+# SECURITY: no secrets live in this repository or in the image. The OpenAI
+# key comes exclusively from the HOST environment (or a git-ignored
+# docker/runtime.env you create locally from runtime.env.example).
+#
+# Usage (from the docker/ folder):
+#   $env:OPENAI_API_KEY = "sk-..."       # or fill docker/runtime.env
+#   docker compose up --build
+#
+# Includes a Redis container so sessions survive app restarts (the app
+# degrades gracefully to in-memory if Redis is down).
+
+services:
+  cliniai:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: cliniai_v2
+    ports:
+      - "8001:8001"
+    environment:
+      # Injected from the host shell at `docker compose up` time — never baked
+      # into the image and never committed to the repo.
+      OPENAI_API_KEY: ${OPENAI_API_KEY:?Set OPENAI_API_KEY in the host environment or in docker/runtime.env}
+      CLINIWEB_API_KEY: ${CLINIWEB_API_KEY:-}
+      # Redis runs as a sibling container.
+      REDIS_ENABLED: "true"
+      REDIS_URL: "redis://redis:6379/0"
+      # SAFETY: booking always points at the fake test host.
+      CLINIWEB_BOOKING_BASE: "https://testers.cliniweb.com/info"
+      LOG_LEVEL: "INFO"
+    # Optional local overrides (git-ignored). Create it from runtime.env.example.
+    env_file:
+      - path: ./runtime.env
+        required: false
+    depends_on:
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8001/health')"]
+      interval: 30s
+      timeout: 5s
+      start_period: 15s
+      retries: 3
+
+  redis:
+    image: redis:7-alpine
+    container_name: cliniai_redis
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5

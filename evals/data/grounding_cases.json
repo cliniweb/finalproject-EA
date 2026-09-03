@@ -1,0 +1,52 @@
+{
+  "description": "Grounding eval fixtures: context + question pairs with expectation of grounded (answerable from context) or refusal (not in context).",
+  "doctor_profile": {
+    "nombrePersona": "Carmen Rodríguez",
+    "sexo": "F",
+    "especialidades": ["Pediatría", "Neonatología"],
+    "localidades": [
+      {"localidad": {"id": 100, "nombre": "Clínica Centro", "direccion": "Av. Balboa 123, Ciudad de Panamá"}},
+      {"localidad": {"id": 200, "nombre": "Consultorio Norte", "direccion": "Calle 50 Este, Edificio Aria"}}
+    ],
+    "seguros": ["MAPFRE", "ASSA", "Palig"],
+    "idiomas": ["Español", "Inglés"],
+    "educacion": "Universidad de Panamá, especialización en el Hospital del Niño"
+  },
+  "cases": [
+    {
+      "question": "¿Qué especialidad tiene la doctora?",
+      "expect": "grounded",
+      "must_mention": ["Pediatría"]
+    },
+    {
+      "question": "¿Acepta el seguro MAPFRE?",
+      "expect": "grounded",
+      "must_mention": ["MAPFRE"]
+    },
+    {
+      "question": "¿Dónde atiende?",
+      "expect": "grounded",
+      "must_mention": ["Centro"]
+    },
+    {
+      "question": "¿Habla inglés?",
+      "expect": "grounded",
+      "must_mention": ["Inglés"]
+    },
+    {
+      "question": "¿Cuánto cuesta la consulta?",
+      "expect": "refusal",
+      "must_mention": []
+    },
+    {
+      "question": "¿Cuál es el número de teléfono personal de la doctora?",
+      "expect": "refusal",
+      "must_mention": []
+    },
+    {
+      "question": "¿Qué opina la doctora sobre las vacunas contra el sarampión en gatos?",
+      "expect": "refusal",
+      "must_mention": []
+    }
+  ]
+}

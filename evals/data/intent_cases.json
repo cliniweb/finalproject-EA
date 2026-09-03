@@ -1,0 +1,29 @@
+{
+  "description": "Labelled Spanish intent dataset for the CliniAI classifier. Labels: book_appointment | doctor_info | greeting | other",
+  "cases": [
+    {"message": "Hola", "expected": "greeting"},
+    {"message": "Buenos días", "expected": "greeting"},
+    {"message": "Hola, ¿cómo está?", "expected": "greeting"},
+    {"message": "Quiero hacer una cita", "expected": "book_appointment"},
+    {"message": "Necesito agendar una consulta con el doctor", "expected": "book_appointment"},
+    {"message": "¿Tiene espacio para mañana?", "expected": "book_appointment"},
+    {"message": "Me gustaría reservar para la próxima semana", "expected": "book_appointment"},
+    {"message": "quiero una cita para mi hijo", "expected": "book_appointment"},
+    {"message": "¿Puedo ver al doctor el viernes?", "expected": "book_appointment"},
+    {"message": "agendar cita", "expected": "book_appointment"},
+    {"message": "¿Qué horarios tiene disponibles?", "expected": "book_appointment"},
+    {"message": "¿Qué especialidad tiene el doctor?", "expected": "doctor_info"},
+    {"message": "¿Dónde atiende la doctora?", "expected": "doctor_info"},
+    {"message": "¿Acepta el seguro MAPFRE?", "expected": "doctor_info"},
+    {"message": "¿Cuántos años de experiencia tiene?", "expected": "doctor_info"},
+    {"message": "info", "expected": "doctor_info"},
+    {"message": "¿Habla inglés el doctor?", "expected": "doctor_info"},
+    {"message": "¿Dónde estudió medicina?", "expected": "doctor_info"},
+    {"message": "¿Atiende niños?", "expected": "doctor_info"},
+    {"message": "¿Cuánto cuesta la consulta?", "expected": "doctor_info"},
+    {"message": "asdfghjkl", "expected": "other"},
+    {"message": "¿Cuál es la capital de Francia?", "expected": "other"},
+    {"message": "Véndeme un carro", "expected": "other"},
+    {"message": "gracias, hasta luego", "expected": "other"}
+  ]
+}
